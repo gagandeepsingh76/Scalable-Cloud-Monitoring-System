@@ -1,0 +1,71 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-monitor}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-monitorpass}
+      POSTGRES_DB: ${POSTGRES_DB:-monitoring}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-monitor} -d ${POSTGRES_DB:-monitoring}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - monitoring
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-monitor}:${POSTGRES_PASSWORD:-monitorpass}@db:5432/${POSTGRES_DB:-monitoring}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-supersecret}
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      CPU_THRESHOLD: ${CPU_THRESHOLD:-80}
+      LATENCY_THRESHOLD_MS: ${LATENCY_THRESHOLD_MS:-250}
+      MEMORY_THRESHOLD: ${MEMORY_THRESHOLD:-85}
+      ADMIN_USERNAME: 1287@gmail.com
+      ADMIN_PASSWORD: 1287
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    depends_on:
+      - db
+    environment:
+      GF_SECURITY_ADMIN_USER: 1287@gmail.com
+      GF_SECURITY_ADMIN_PASSWORD: 1287
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/provisioning/grafana.ini:/etc/grafana/grafana.ini
+    networks:
+      - monitoring
+
+volumes:
+  db_data:
+  grafana_data:
+
+networks:
+  monitoring:
+    driver: bridge
+

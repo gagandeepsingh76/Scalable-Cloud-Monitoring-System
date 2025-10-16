@@ -1,0 +1,29 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "type": "text",
+      "title": "Welcome",
+      "options": {
+        "mode": "markdown",
+        "content": "# GDK | Cloud Monitoring\n\nWelcome to the GDK observability portal. Use the left nav to explore predefined dashboards.\n\n---\n\n© GDK"
+      },
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 0}
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["gdk"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "timepicker": {},
+  "timezone": "",
+  "title": "GDK Home",
+  "uid": "gdk-home",
+  "version": 1
+}

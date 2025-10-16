@@ -1,0 +1,61 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "CPU Usage (%)",
+      "datasource": {"type": "postgres", "uid": "PostgreSQL Monitoring"},
+      "targets": [
+        {
+          "format": "time_series",
+          "hide": false,
+          "rawSql": "SELECT timestamp as time, cpu as value FROM metrics ORDER BY timestamp",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Latency (ms)",
+      "datasource": {"type": "postgres", "uid": "PostgreSQL Monitoring"},
+      "targets": [
+        {
+          "format": "time_series",
+          "hide": false,
+          "rawSql": "SELECT timestamp as time, latency as value FROM metrics ORDER BY timestamp",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Uptime (s)",
+      "datasource": {"type": "postgres", "uid": "PostgreSQL Monitoring"},
+      "targets": [
+        {
+          "format": "time_series",
+          "hide": false,
+          "rawSql": "SELECT timestamp as time, uptime as value FROM metrics ORDER BY timestamp",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["monitoring"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "timepicker": {},
+  "timezone": "",
+  "title": "Cloud Metrics Overview",
+  "uid": "cloud-metrics-overview",
+  "version": 1
+}
+

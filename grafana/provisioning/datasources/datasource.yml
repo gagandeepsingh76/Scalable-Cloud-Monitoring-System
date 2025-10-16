@@ -1,0 +1,20 @@
+apiVersion: 1
+
+datasources:
+  - name: PostgreSQL Monitoring
+    type: postgres
+    access: proxy
+    url: db:5432
+    user: ${POSTGRES_USER}
+    secureJsonData:
+      password: ${POSTGRES_PASSWORD}
+    jsonData:
+      database: ${POSTGRES_DB}
+      sslmode: "disable"
+      timeInterval: "1s"
+      postgresVersion: 1600
+
+# Set default home dashboard and org name via provisioning settings
+# Note: org rename is typically done via grafana.ini, but we can set home dashboard here
+# For a full brand change, a custom grafana.ini can be added.
+
