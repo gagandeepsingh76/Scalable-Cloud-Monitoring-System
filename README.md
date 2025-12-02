@@ -85,10 +85,20 @@ A PostgreSQL datasource is provisioned. Import the dashboard at `grafana/dashboa
 uvicorn app.main:app --reload
 ```
 
+<img width="1365" height="641" alt="Screenshot 2025-12-02 160558" src="https://github.com/user-attachments/assets/e7a916ca-5d07-43a6-854e-fdc10451db11" />
+
+<img width="1365" height="632" alt="Screenshot 2025-12-02 160541" src="https://github.com/user-attachments/assets/f3016caa-506b-4247-b32c-2b17b78e4b96" />
+
+<img width="1365" height="624" alt="Screenshot 2025-12-02 160527" src="https://github.com/user-attachments/assets/09fe5b20-8616-4c8b-b838-7bc0d6d4c8a4" />
+
+
+
+
 ## Notes
 - Tables are created on startup for convenience; use Alembic for production.
 - Alerts are stored in the `alerts` table when thresholds are exceeded.
 - CI workflow at `.github/workflows/ci.yml` builds on PRs and pushes to `main`.
+
 
 
 
