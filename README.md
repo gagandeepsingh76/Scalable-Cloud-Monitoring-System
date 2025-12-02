@@ -1,4 +1,4 @@
-# GDK | Scalable Cloud Monitoring System
+Scalable Cloud Monitoring System
 
 Production-grade backend system to collect, store, and visualize cloud server metrics with FastAPI, PostgreSQL, Docker, and Grafana.
 
@@ -89,5 +89,6 @@ uvicorn app.main:app --reload
 - Tables are created on startup for convenience; use Alembic for production.
 - Alerts are stored in the `alerts` table when thresholds are exceeded.
 - CI workflow at `.github/workflows/ci.yml` builds on PRs and pushes to `main`.
+
 
 
